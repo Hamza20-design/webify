@@ -312,7 +312,13 @@
         .btn-outline-pink:hover { background:var(--pink); color:#fff; }
         .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
         .project-card { border-radius:1.25rem; overflow:hidden; cursor:none; position:relative; height:300px; border:1px solid rgba(255,255,255,.07); }
-        .proj-img { position:absolute; inset:0; transition:transform .5s cubic-bezier(.22,1,.36,1); }
+        .proj-img {
+            position:absolute; inset:0;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            transition:transform .5s cubic-bezier(.22,1,.36,1);
+        }
         .project-card:hover .proj-img { transform:scale(1.05); }
         .proj-overlay { position:absolute; inset:0; background:rgba(3,7,18,.85); opacity:0; transition:opacity .3s; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:.75rem; }
         .project-card:hover .proj-overlay { opacity:1; }
@@ -428,7 +434,12 @@
         .mp-card:hover { border-color:var(--cyan); transform:translateY(-4px); }
         .slider-container { position:relative; height:200px; overflow:hidden; }
         .slider-track { display:flex; height:100%; transition:transform 0.5s ease; }
-        .slide { min-width:100%; height:100%; background-size:cover; background-position:center; }
+        .slide {
+            min-width:100%; height:100%;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
         .slider-dots { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); display:flex; gap:5px; }
         .slider-dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.4); cursor:pointer; transition:0.3s; }
         .slider-dot.active { background:var(--cyan); width:20px; border-radius:10px; }
@@ -760,7 +771,7 @@
             projectsArray.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'project-card';
-                const bgStyle = p.img ? `background:${p.bg};background-image:url('${p.img}');background-size:cover;background-position:center;` : `background:${p.bg};`;
+                const bgStyle = p.img ? `background:${p.bg};background-image:url('${p.img}');background-size:cover;background-position:center;background-repeat:no-repeat;` : `background:${p.bg};`;
                 card.innerHTML = `<div class="proj-img" style="${bgStyle}"></div><div class="proj-overlay"><div class="proj-overlay-title">${p.title}</div><div class="proj-overlay-cat">${p.category}</div><button class="btn-view">View Project →</button></div><div class="proj-info"><div class="proj-title">${p.title}</div><div class="proj-meta">${p.category} · ${p.year}</div></div>`;
                 if (p.link) card.addEventListener('click', ()=> window.open(p.link, '_blank'));
                 card.addEventListener('mouseenter', ()=> document.body.classList.add('cursor-hover'));
@@ -769,7 +780,7 @@
             });
             attachCursorToContainer(container);
         }
-        buildProjectsGrid(document.getElementById('projectsGrid'), PROJECTS.slice(0, 2)); // Only first 2 on homepage
+        buildProjectsGrid(document.getElementById('projectsGrid'), PROJECTS.slice(0, 2));
 
         // ── STATS ─────────────────────────────────────────────────────────────────────
         (function() {
@@ -879,6 +890,9 @@
                     const slide = document.createElement('div');
                     slide.className = 'slide';
                     slide.style.backgroundImage = `url('${img}')`;
+                    slide.style.backgroundSize = 'cover';
+                    slide.style.backgroundPosition = 'center';
+                    slide.style.backgroundRepeat = 'no-repeat';
                     track.appendChild(slide);
                     const dot = document.createElement('span');
                     dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
@@ -891,7 +905,7 @@
                     dotsEl.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === index));
                     slideIndex = index;
                 };
-                const slideInterval = setInterval(() => { const next = (slideIndex + 1) % item.images.length; goToSlide(track, dotsContainer, next); }, 3500);
+                setInterval(() => { const next = (slideIndex + 1) % item.images.length; goToSlide(track, dotsContainer, next); }, 3500);
                 
                 const cardInfo = card.querySelector('.mp-body');
                 const cardForm = card.querySelector('.card-form');
@@ -957,7 +971,7 @@
         const allWorkGrid = document.getElementById('allWorkGrid');
 
         function openAllWorkPage() {
-            buildProjectsGrid(allWorkGrid, PROJECTS); // full list
+            buildProjectsGrid(allWorkGrid, PROJECTS);
             document.querySelectorAll('body > *:not(#all-work-page):not(#cursor-ring):not(#cursor-dot)').forEach(el => el.style.display = 'none');
             allWorkPage.classList.add('active');
             document.body.classList.add('no-scroll');
