@@ -184,7 +184,7 @@
         }
         .nav-cta:hover { background:#fff; transform:scale(1.05); }
 
-        /* Hamburger */
+        /* Hamburger (3 lines) */
         .nav-toggle {
             display: none;
             background: none;
@@ -195,10 +195,11 @@
             padding: 10px;
             z-index: 1100;
         }
-        .nav-toggle-dot {
-            width: 5px; height: 5px;
+        .nav-toggle-bar {
+            width: 24px;
+            height: 3px;
             background: var(--cyan);
-            border-radius: 50%;
+            border-radius: 2px;
             transition: all 0.3s;
         }
         .nav-dropdown {
@@ -329,6 +330,14 @@
         .proj-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:2px; color:#fff; text-shadow:0 2px 20px rgba(0,0,0,.8); }
         .proj-meta { font-size:.7rem; letter-spacing:2px; color:rgba(255,255,255,.5); text-transform:uppercase; }
 
+        /* PACKAGES OVERVIEW SECTION */
+        #packages-overview {
+            background: rgba(0,0,0,.2);
+            border-top: 1px solid rgba(255,255,255,.04);
+            border-bottom: 1px solid rgba(255,255,255,.04);
+            text-align: center;
+        }
+
         /* STATS */
         #stats { background:none; }
         .stats-header { text-align:center; margin-bottom:4rem; }
@@ -413,7 +422,7 @@
         .social-btn { width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.1); background:transparent; color:rgba(255,255,255,.4); cursor:none; font-family:'Outfit',sans-serif; font-weight:700; transition:all .2s; display:flex; align-items:center; justify-content:center; font-size:.65rem; }
         .social-btn:hover { border-color:var(--cyan); color:var(--cyan); }
 
-        /* OVERLAY PAGES (Marketplace, All Work, Packages) */
+        /* OVERLAY PAGES */
         #marketplace-page, #all-work-page, #packages-page {
             position: fixed; top:0; left:0; width:100%; height:100vh; background:var(--bg); z-index:10000; overflow-y:auto; display:none; padding:2rem; color:var(--text);
         }
@@ -477,6 +486,104 @@
         .monthly-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
         .monthly-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:1.5rem; padding:2rem; }
 
+        /* CART PANEL – enhanced visibility */
+        .cart-toggle-btn {
+            position: relative;
+            background: var(--cyan);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0,245,255,0.6);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-toggle-btn:hover { transform: scale(1.1); }
+        #cartCount {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--pink);
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .cart-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 2rem;
+            width: 360px;
+            max-height: 70vh;
+            background: rgba(0,0,0,0.95);
+            border: 2px solid var(--cyan);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            z-index: 11500;
+            display: none;
+            backdrop-filter: blur(20px);
+            overflow-y: auto;
+            box-shadow: 0 0 30px rgba(0,245,255,0.4);
+        }
+        .cart-panel.open { display: block; }
+        .cart-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .cart-items { display: flex; flex-direction: column; gap: 0.8rem; }
+        .cart-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 0.8rem;
+        }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-weight: 600; color: #fff; }
+        .cart-item-price { color: var(--cyan); font-size: 0.9rem; }
+        .cart-item-remove { color: var(--pink); background: none; border: none; cursor: pointer; font-size: 1.2rem; }
+        .cart-total { font-weight: 700; color: var(--cyan); margin-top: 1rem; text-align: right; font-size: 1.2rem; }
+        .btn-add-to-cart {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border: none;
+            color: var(--bg);
+            padding: 0.7rem 1.2rem;
+            border-radius: 100px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn-add-to-cart:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* CHECKOUT MODAL */
+        .checkout-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 12000;
+            display: none; align-items: center; justify-content: center;
+        }
+        .checkout-modal.active { display: flex; }
+        .checkout-box {
+            background: var(--bg); border: 1px solid var(--cyan);
+            border-radius: 1.5rem; padding: 2rem; max-width: 400px; width: 90%;
+            text-align: center;
+        }
+        .checkout-box input {
+            width: 100%; padding: 0.8rem; margin: 0.5rem 0;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 0.8rem; color: #fff; font-family: 'Outfit', sans-serif;
+        }
+        .checkout-box .btn-confirm {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            border: none; padding: 0.8rem 2rem; border-radius: 100px;
+            color: var(--bg); font-weight: 700; margin-top: 1rem; cursor: pointer;
+        }
+
         .success-popup {
             position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.95); border:1px solid var(--cyan);
             border-radius:1.5rem; padding:2.5rem; text-align:center; z-index:12000; display:none;
@@ -508,9 +615,9 @@
             <button class="nav-cta" onclick="scrollToSection('contact')">Get Your Website Today</button>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Menu">
-            <span class="nav-toggle-dot"></span>
-            <span class="nav-toggle-dot"></span>
-            <span class="nav-toggle-dot"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
         </button>
         <div class="nav-dropdown" id="navDropdown">
             <button class="nav-link" onclick="scrollToSection('services'); closeDropdown()">Services</button>
@@ -564,6 +671,16 @@
                 <button class="btn-outline-pink" id="viewAllWorkBtn">View All →</button>
             </div>
             <div class="projects-grid" id="projectsGrid"></div>
+        </div>
+    </section>
+
+    <!-- PACKAGES OVERVIEW SECTION -->
+    <section id="packages-overview">
+        <div class="container" style="text-align:center;">
+            <div class="section-label" style="color:var(--pink)">// VALUE PACKS</div>
+            <h2 class="section-title">ALL-IN-ONE<br><span class="grad-pink">WEBSITE PACKAGES</span></h2>
+            <p style="color:rgba(255,255,255,0.5); max-width:500px; margin: 1.5rem auto 0; line-height:1.7;">Affordable, conversion‑ready bundles with add‑ons & monthly plans. Build your cart.</p>
+            <button class="btn-outline-pink" id="explorePackagesBtn" style="margin-top:2rem;">Explore Packages →</button>
         </div>
     </section>
 
@@ -669,6 +786,34 @@
     <div id="packages-page">
         <button class="pk-back" id="closePackagesBtn">← Back to Home</button>
         <h2 class="pk-title">OUR PACKAGES</h2>
+
+        <!-- Cart floating button & panel -->
+        <div id="cart-icon-wrap" style="position:fixed; bottom:2rem; right:2rem; z-index:11000;">
+            <button id="cartToggle" class="cart-toggle-btn">🛒 <span id="cartCount">0</span></button>
+        </div>
+        <div id="cartPanel" class="cart-panel">
+            <div class="cart-panel-header">
+                <h3 style="font-family:'Bebas Neue',sans-serif; letter-spacing:2px; color:var(--cyan);">YOUR CART</h3>
+                <button id="closeCartPanel" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:none;">✕</button>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total" id="cartTotal">Total: 0 PKR</div>
+            <button id="checkoutBtn" class="btn-submit" style="width:100%; margin-top:1rem;">Checkout</button>
+        </div>
+
+        <!-- Checkout modal -->
+        <div class="checkout-modal" id="checkoutModal">
+            <div class="checkout-box">
+                <h3 style="color:var(--cyan); margin-bottom:1rem;">Complete Your Order</h3>
+                <input type="text" id="checkName" placeholder="Your Name" required>
+                <input type="text" id="checkBusiness" placeholder="Business Name" required>
+                <input type="text" id="checkType" placeholder="Business Type (e.g. Salon)" required>
+                <input type="tel" id="checkPhone" placeholder="Phone Number" required>
+                <button class="btn-confirm" id="confirmCheckoutBtn">Place Order</button>
+                <button style="background:transparent;border:none;color:#fff;margin-top:0.5rem;cursor:none;" id="closeCheckoutBtn">Cancel</button>
+            </div>
+        </div>
+
         <div class="pk-grid">
             <div class="package-card">
                 <div class="package-name">BASIC PACKAGE</div>
@@ -686,6 +831,7 @@
                 <p style="margin-top:1rem; color:var(--cyan); font-weight:600;">✔ Static website · No database</p>
                 <p style="color:rgba(255,255,255,0.6);">🌐 Hosting included (2 months)</p>
                 <p style="color:rgba(255,255,255,0.4); margin-top:0.5rem;">🎯 Best for small businesses & startups</p>
+                <button class="btn-add-to-cart" data-id="basic" data-name="Basic Package" data-price="17000">Add to Cart</button>
             </div>
             <div class="package-card premium">
                 <div class="package-name">🔥 PREMIUM PACKAGE</div>
@@ -704,18 +850,19 @@
                 <p style="margin-top:1rem; color:var(--cyan); font-weight:600;">✔ Dynamic website · Optional database</p>
                 <p style="color:rgba(255,255,255,0.6);">🌐 Hosting (8 months) + Domain (1 year)</p>
                 <p style="color:rgba(255,255,255,0.4); margin-top:0.5rem;">🎯 Best for photographers, clinics, event planners</p>
+                <button class="btn-add-to-cart" data-id="premium" data-name="Premium Package" data-price="29000">Add to Cart</button>
             </div>
         </div>
 
         <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--pink); margin-bottom:1.5rem;">💎 ADD-ONS (EXTRA SERVICES)</h3>
         <div class="addon-grid">
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Extra Page</span><br>1,700 PKR</div>
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Logo Design</span><br>2,000 – 5,000 PKR</div>
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">WhatsApp Automation</span><br>5,000 – 10,000 PKR</div>
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Database Integration</span><br>5,000 – 8,000 PKR</div>
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Admin Dashboard</span><br>10,000 PKR</div>
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Speed Optimization</span><br>2,000 PKR</div>
-            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">SEO Setup (basic)</span><br>2,000 – 5,000 PKR</div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Extra Page</span><br>1,700 PKR <button class="btn-add-to-cart" data-id="extra-page" data-name="Extra Page" data-price="1700">Add</button></div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Logo Design</span><br>3,500 PKR <button class="btn-add-to-cart" data-id="logo-design" data-name="Logo Design" data-price="3500">Add</button></div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">WhatsApp Automation</span><br>7,500 PKR <button class="btn-add-to-cart" data-id="wa-auto" data-name="WhatsApp Automation" data-price="7500">Add</button></div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Database Integration</span><br>6,500 PKR <button class="btn-add-to-cart" data-id="db-integration" data-name="Database Integration" data-price="6500">Add</button></div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Admin Dashboard</span><br>10,000 PKR <button class="btn-add-to-cart" data-id="admin-dash" data-name="Admin Dashboard" data-price="10000">Add</button></div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">Speed Optimization</span><br>2,000 PKR <button class="btn-add-to-cart" data-id="speed-opt" data-name="Speed Optimization" data-price="2000">Add</button></div>
+            <div class="addon-card"><span style="color:var(--cyan); font-weight:700;">SEO Setup (basic)</span><br>3,500 PKR <button class="btn-add-to-cart" data-id="seo-basic" data-name="SEO Basic Setup" data-price="3500">Add</button></div>
         </div>
 
         <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--purple); margin-bottom:1.5rem;">📅 MONTHLY PACKAGES</h3>
@@ -730,6 +877,7 @@
                     <li>Monthly backup</li>
                     <li>1-2 minor updates</li>
                 </ul>
+                <button class="btn-add-to-cart" data-id="monthly-basic" data-name="Monthly Basic Plan" data-price="2000">Add to Cart</button>
             </div>
             <div class="monthly-card" style="border-color: rgba(123,97,255,0.3); background:rgba(123,97,255,0.03);">
                 <div style="font-size:1.5rem; font-weight:700; color:#fff;">🔥 STANDARD PLAN</div>
@@ -741,6 +889,7 @@
                     <li>Up to 5 small updates</li>
                     <li>WhatsApp priority support</li>
                 </ul>
+                <button class="btn-add-to-cart" data-id="monthly-standard" data-name="Monthly Standard Plan" data-price="4000">Add to Cart</button>
             </div>
             <div class="monthly-card">
                 <div style="font-size:1.5rem; font-weight:700; color:#fff;">💎 PREMIUM PLAN</div>
@@ -753,6 +902,7 @@
                     <li>Basic SEO monitoring</li>
                     <li>Monthly performance report</li>
                 </ul>
+                <button class="btn-add-to-cart" data-id="monthly-premium" data-name="Monthly Premium Plan" data-price="6000">Add to Cart</button>
             </div>
         </div>
 
@@ -768,17 +918,19 @@
                     <li>Lead filtering</li>
                     <li>Message flow optimization</li>
                 </ul>
+                <button class="btn-add-to-cart" data-id="wa-setup" data-name="WhatsApp Automation Setup" data-price="7500">Add to Cart</button>
             </div>
         </div>
     </div>
 
     <div class="success-popup" id="successPopup">
-        <h3>Bookings Confirmed</h3>
+        <h3>Booking Confirmed</h3>
         <p>We'll reach out shortly to get you started.</p>
         <button class="btn-confirm" onclick="document.getElementById('successPopup').classList.remove('active')">OK</button>
     </div>
 
     <script>
+        // ----- DATA -----
         const SERVICES = [
             { icon:"⬡", title:"Web Design", desc:"Pixel-perfect interfaces that captivate and convert. Every pixel placed with purpose.", tag:"UI/UX", color:"#00F5FF" },
             { icon:"◈", title:"Development", desc:"Blazing-fast, scalable web apps built with modern tech stacks that scale to millions.", tag:"ENGINEERING", color:"#FF2D78" },
@@ -787,27 +939,23 @@
             { icon:"⬡", title:"AI Automations", desc:"Smart workflows powered by AI that eliminate repetitive tasks, cut costs, and scale your business effortlessly.", tag:"AI", color:"#FF2D78" },
             { icon:"◆", title:"Maintenance", desc:"24/7 monitoring, updates, and support so your site runs flawlessly around the clock.", tag:"SUPPORT", color:"#7B61FF" },
         ];
-
         const PROJECTS = [
             { title:"Photography Booking", category:"Photography Website", year:"2024", bg:"linear-gradient(135deg,#0d0d0d,#1a1a2e,#16213e)", img:"photography.jpg", link:"https://furqanmughalphotography.vercel.app/" },
             { title:"Event Planning Bookings", category:"Event Planning", year:"2024", bg:"linear-gradient(135deg,#1a0533,#6d1b7b,#e040fb44)", img:"event.jpg", link:"https://euphoric-events.vercel.app/" },
             { title:"Premium Photography", category:"Photography Bookings", year:"2025", bg:"linear-gradient(135deg,#1a0a2e,#3d1a6e,#8b5cf6)", img:"premium.jpg", link:"https://babarminhaswedsofilm.oneapp.dev/" },
             { title:"Physiotherapist Bookings", category:"Physiotherapy Website", year:"2025", bg:"linear-gradient(135deg,#0a1c2a,#1a3a5c,#2c5f8a)", img:"dr.jpg", link:"https://drhaseebphysiotherapist.oneapp.dev/" },
         ];
-
         const STATS = [
             { val:150, suffix:"+", label:"Projects Launched" },
             { val:98, suffix:"%", label:"Client Satisfaction" },
             { val:12, suffix:"x", label:"Avg ROI Delivered" },
             { val:7, suffix:"yr", label:"Years of Mastery" },
         ];
-
         const TESTIMONIALS = [
             { quote:"WEBIFY didn't just build us a website — they built us a weapon. Traffic up 340% in 90 days.", name:"Mara Osei", role:"CEO, NovaPay", avatar:"MO", color:"#00F5FF" },
             { quote:"Their attention to detail is borderline obsessive. The site looks like it cost 10× what we paid.", name:"James Harlow", role:"Founder, Driftworks", avatar:"JH", color:"#FF2D78" },
             { quote:"We went live and conversion jumped immediately. The UX work they did was transformative.", name:"Priya Shah", role:"CMO, Luminary", avatar:"PS", color:"#7B61FF" },
         ];
-
         const MARKETPLACE_ITEMS = [
             { name:"QuickBite", desc:"Simple fast food website with online ordering & menu display.", price:"10,000 PKR", category:"basic", images:["fastfood1.jpg","fastfood2.jpg","fastfood3.jpg","fastfood4.jpg","fastfood5.jpg"] },
             { name:"ShopEase", desc:"Basic e-commerce store with product listings & cart.", price:"13,000 PKR", category:"basic", images:["ecommerce1.jpg","ecommerce2.jpg","ecommerce3.jpg"] },
@@ -816,7 +964,91 @@
             { name:"Feast & Flair", desc:"Premium catering service website with event planning tools.", price:"18,000 PKR", category:"premium", images:["catering1.jpg","catering2.jpg","catering3.jpg","catering4.jpg","catering5.jpg","catering6.jpg","catering7.jpg"] }
         ];
 
-        // Cursor
+        // ----- CART SYSTEM -----
+        let cart = [];
+        const cartCountEl = document.getElementById('cartCount');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const cartPanel = document.getElementById('cartPanel');
+        const checkoutModal = document.getElementById('checkoutModal');
+
+        function updateCartUI() {
+            cartCountEl.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartItemsEl.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString()} PKR</div>
+                    </div>
+                    <button class="cart-item-remove" data-id="${item.id}">✕</button>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            cartTotalEl.textContent = `Total: ${total.toLocaleString()} PKR`;
+            document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.currentTarget.dataset.id;
+                    cart = cart.filter(item => item.id !== id);
+                    updateCartUI();
+                });
+            });
+        }
+
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ id, name, price: Number(price), quantity: 1 });
+            }
+            updateCartUI();
+            if (!cartPanel.classList.contains('open')) {
+                cartPanel.classList.add('open');
+            }
+        }
+
+        document.getElementById('cartToggle').addEventListener('click', () => {
+            cartPanel.classList.toggle('open');
+        });
+        document.getElementById('closeCartPanel').addEventListener('click', () => {
+            cartPanel.classList.remove('open');
+        });
+
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) return;
+            checkoutModal.classList.add('active');
+        });
+        document.getElementById('closeCheckoutBtn').addEventListener('click', () => {
+            checkoutModal.classList.remove('active');
+        });
+        document.getElementById('confirmCheckoutBtn').addEventListener('click', () => {
+            const name = document.getElementById('checkName').value.trim();
+            const business = document.getElementById('checkBusiness').value.trim();
+            const type = document.getElementById('checkType').value.trim();
+            const phone = document.getElementById('checkPhone').value.trim();
+            if (!name || !business || !type || !phone) {
+                alert('Please fill all required fields.');
+                return;
+            }
+            document.getElementById('successPopup').classList.add('active');
+            checkoutModal.classList.remove('active');
+            cart = [];
+            updateCartUI();
+            cartPanel.classList.remove('open');
+            document.getElementById('checkName').value = '';
+            document.getElementById('checkBusiness').value = '';
+            document.getElementById('checkType').value = '';
+            document.getElementById('checkPhone').value = '';
+        });
+
+        document.querySelectorAll('.btn-add-to-cart').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const { id, name, price } = e.currentTarget.dataset;
+                addToCart(id, name, price);
+            });
+        });
+
+        // ----- CURSOR -----
         const ring = document.getElementById('cursor-ring');
         const dot = document.getElementById('cursor-dot');
         document.addEventListener('mousemove', e => { ring.style.left = e.clientX+'px'; ring.style.top = e.clientY+'px'; dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px'; });
@@ -879,7 +1111,7 @@
             }
         }
 
-        // Marketplace
+        // Marketplace logic
         const marketplacePage = document.getElementById('marketplace-page');
         const viewMarketplaceBtn = document.getElementById('viewMarketplaceBtn');
         const closeMarketplaceBtn = document.getElementById('closeMarketplaceBtn');
@@ -921,6 +1153,8 @@
         function openPackagesPage(){ document.querySelectorAll('body>*:not(#packages-page):not(#cursor-ring):not(#cursor-dot)').forEach(el=>el.style.display='none'); packagesPage.classList.add('active'); document.body.classList.add('no-scroll'); }
         function closePackagesPage(){ document.querySelectorAll('body>*').forEach(el=>{ if(el.id!=='packages-page'&&el.id!=='cursor-ring'&&el.id!=='cursor-dot')el.style.display=''; }); packagesPage.classList.remove('active'); document.body.classList.remove('no-scroll'); window.scrollTo({top:0,behavior:'smooth'}); }
         closePackagesBtn.addEventListener('click',closePackagesPage);
+
+        document.getElementById('explorePackagesBtn').addEventListener('click', openPackagesPage);
     </script>
 </body>
 </html>
