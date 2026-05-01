@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>WEBIFY — Premium Web Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         *,
         *::before,
@@ -330,7 +331,7 @@
         .proj-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:2px; color:#fff; text-shadow:0 2px 20px rgba(0,0,0,.8); }
         .proj-meta { font-size:.7rem; letter-spacing:2px; color:rgba(255,255,255,.5); text-transform:uppercase; }
 
-        /* PACKAGES OVERVIEW SECTION */
+        /* PACKAGES OVERVIEW SECTION (new) */
         #packages-overview {
             background: rgba(0,0,0,.2);
             border-top: 1px solid rgba(255,255,255,.04);
@@ -422,7 +423,7 @@
         .social-btn { width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.1); background:transparent; color:rgba(255,255,255,.4); cursor:none; font-family:'Outfit',sans-serif; font-weight:700; transition:all .2s; display:flex; align-items:center; justify-content:center; font-size:.65rem; }
         .social-btn:hover { border-color:var(--cyan); color:var(--cyan); }
 
-        /* OVERLAY PAGES */
+        /* OVERLAY PAGES (Marketplace, All Work, Packages) */
         #marketplace-page, #all-work-page, #packages-page {
             position: fixed; top:0; left:0; width:100%; height:100vh; background:var(--bg); z-index:10000; overflow-y:auto; display:none; padding:2rem; color:var(--text);
         }
@@ -486,7 +487,7 @@
         .monthly-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
         .monthly-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:1.5rem; padding:2rem; }
 
-        /* CART PANEL – enhanced visibility */
+        /* CART PANEL */
         .cart-toggle-btn {
             position: relative;
             background: var(--cyan);
@@ -496,7 +497,7 @@
             height: 60px;
             font-size: 1.8rem;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(0,245,255,0.6);
+            box-shadow: 0 0 20px rgba(0,245,255,0.4);
             transition: 0.3s;
             display: flex;
             align-items: center;
@@ -520,19 +521,19 @@
         }
         .cart-panel {
             position: fixed;
-            bottom: 100px;
-            right: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 360px;
             max-height: 70vh;
-            background: rgba(0,0,0,0.95);
-            border: 2px solid var(--cyan);
+            background: rgba(10,10,20,0.97);
+            border: 1px solid rgba(0,245,255,0.3);
             border-radius: 1.5rem;
             padding: 1.5rem;
             z-index: 11500;
             display: none;
             backdrop-filter: blur(20px);
             overflow-y: auto;
-            box-shadow: 0 0 30px rgba(0,245,255,0.4);
         }
         .cart-panel.open { display: block; }
         .cart-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -674,7 +675,7 @@
         </div>
     </section>
 
-    <!-- PACKAGES OVERVIEW SECTION -->
+    <!-- NEW PACKAGES OVERVIEW SECTION (after projects) -->
     <section id="packages-overview">
         <div class="container" style="text-align:center;">
             <div class="section-label" style="color:var(--pink)">// VALUE PACKS</div>
@@ -985,6 +986,12 @@
             `).join('');
             const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
             cartTotalEl.textContent = `Total: ${total.toLocaleString()} PKR`;
+            
+            // Close cart panel if empty
+            if (cart.length === 0) {
+                cartPanel.classList.remove('open');
+            }
+            
             document.querySelectorAll('.cart-item-remove').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const id = e.currentTarget.dataset.id;
@@ -1007,8 +1014,13 @@
             }
         }
 
+        // Fix: Initialize cart properly
+        updateCartUI();
+
         document.getElementById('cartToggle').addEventListener('click', () => {
-            cartPanel.classList.toggle('open');
+            if (cart.length > 0) {
+                cartPanel.classList.toggle('open');
+            }
         });
         document.getElementById('closeCartPanel').addEventListener('click', () => {
             cartPanel.classList.remove('open');
@@ -1154,6 +1166,7 @@
         function closePackagesPage(){ document.querySelectorAll('body>*').forEach(el=>{ if(el.id!=='packages-page'&&el.id!=='cursor-ring'&&el.id!=='cursor-dot')el.style.display=''; }); packagesPage.classList.remove('active'); document.body.classList.remove('no-scroll'); window.scrollTo({top:0,behavior:'smooth'}); }
         closePackagesBtn.addEventListener('click',closePackagesPage);
 
+        // New explore button triggers same open
         document.getElementById('explorePackagesBtn').addEventListener('click', openPackagesPage);
     </script>
 </body>
